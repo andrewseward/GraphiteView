@@ -1,0 +1,77 @@
+<html>
+  <head>
+    <title>Graphite View</title>
+    <script type="text/javascript">
+      function loadGraph()
+      {
+
+          var graphImg = document.getElementById('graph');
+          graphImg.src = "";
+          var imageSrc = window.location.search.replace("?g=","");
+          var buffer = 10;
+          var pageWidth = getWidth()-buffer;
+          var pageHeight = getHeight()-buffer;
+
+          graphImg.style.width = pageWidth + 'px';
+          graphImg.style.height = pageHeight + 'px';
+
+          imageSrc = imageSrc.replace(/width=\d+?(?=&)/,"width="+pageWidth);
+          imageSrc = imageSrc.replace(/height=\d+?(?=&)/,"height="+pageHeight);
+
+          graphImg.src = imageSrc;
+
+      }
+      function reloadGraph()
+      {
+        loadGraph();
+        setTimeout(reloadGraph, 10000);
+      }
+
+      function getParameterByName(name) {
+          name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+          var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+              results = regex.exec(location.search);
+          return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+      function getWidth()
+      {
+              var x = 0;
+              if (self.innerHeight)
+              {
+                      x = self.innerWidth;
+              }
+              else if (document.documentElement && document.documentElement.clientHeight)
+              {
+                      x = document.documentElement.clientWidth;
+              }
+              else if (document.body)
+              {
+                      x = document.body.clientWidth;
+              }
+              return x;
+      }
+      function getHeight()
+      {
+              var y = 0;
+              if (self.innerHeight)
+              {
+                      y = self.innerHeight;
+              }
+              else if (document.documentElement && document.documentElement.clientHeight)
+              {
+                      y = document.documentElement.clientHeight;
+              }
+              else if (document.body)
+              {
+                      y = document.body.clientHeight;
+              }
+              return y;
+      }
+      window.addEventListener('resize', loadGraph);
+
+    </script>
+  </head>
+  <body onload="reloadGraph();" bgcolor="#000000">
+    <img id="graph" />
+  </body>
+</html>
