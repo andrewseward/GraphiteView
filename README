@@ -5,3 +5,4 @@ Usage:
 GraphiteView.htm?g= <the url of your Graphite graph image>
 
 e.g. GraphiteView.htm?g=http://mygraphiteinstance.com/render/?width=1610&height=937&_salt=1392913357.74&from=-6weeks&target=alias(summarize(sumSeries(graphite.metric.*.count)%2C%221d%22)%2C%22Per%20Day%22)&title=Total%20Processed
+
